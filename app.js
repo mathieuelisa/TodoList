@@ -37,7 +37,6 @@ const babel = new Item({
 
 const defaultItems = [react,jquery,babel]
 
-
 const listSchema = {
   name: String,
   items: [itemsSchema]
@@ -65,26 +64,23 @@ app.get("/", function(req, res) {
  })
 });
 
+
 app.get("/:customListName", function(req,res){
   const customListName = req.params.customListName
 
   List.findOne({name: customListName}, function(err, foundList){
-    if(err){
-      console.log(err)
-    } else {
-      if (foundList){
-        //Show a existing list
-
-        res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
-      } else {
+    if(!err){
+      if (!foundList){
         //create a new list
         const list = new List ({
           name: customListName,
           items: defaultItems
         })
-      
         list.save();
         res.redirect("/" + customListName)
+      } else {
+        //Show a existing list
+        res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
       }
     }
   })
@@ -94,15 +90,22 @@ app.get("/:customListName", function(req,res){
 app.post("/", function(req, res){
 
   const itemName = req.body.newItem;
+  const listName = req.body.list
 
   const item = new Item({
     name:itemName
   })
 
-  item.save()
-
-  console.log("You added a new item in your ToDo list")
-  res.redirect("/")
+  if(listName === "TODAY"){
+    item.save()
+    res.redirect("/")
+  } else {
+    List.findOne({name:listName}, function(err, foundList){
+      foundList.items.push(item);
+      foundList.save();
+      res.redirect("/" + listName)
+    }) 
+  }
 });
 
 
