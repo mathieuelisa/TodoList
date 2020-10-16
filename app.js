@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose")
+const _ = require("lodash")
 
 
 const app = express();
@@ -45,7 +46,6 @@ const listSchema = {
 const List = mongoose.model("List", listSchema)
 
 
-
 app.get("/", function(req, res) {
 
  Item.find({}, function(err, foundItems){
@@ -66,7 +66,7 @@ app.get("/", function(req, res) {
 
 
 app.get("/:customListName", function(req,res){
-  const customListName = req.params.customListName
+  const customListName = _.capitalize(req.params.customListName)
 
   List.findOne({name: customListName}, function(err, foundList){
     if(!err){
@@ -112,13 +112,23 @@ app.post("/", function(req, res){
 app.post("/delete", function(req,res){
 
   const deletedItem = req.body.checkbox;
+  const listName = req.body.listName
 
-  Item.findByIdAndRemove(deletedItem, function (err) {
-    if(!err){
-        console.log("Your item has been removed from your ToDo list")
-    }
-    res.redirect("/")
-});
+  if(listName === "TODAY"){
+    Item.findByIdAndRemove(deletedItem, function (err) {
+      if(!err){
+          console.log("Your item has been removed from your Todo list!")
+          res.redirect("/")
+      }
+  });
+  } else {
+    List.findOneAndUpdate({name: listName},{$pull:{items:{_id:deletedItem}}}, function(err, foundList){
+        if(!err){
+          res.redirect("/" + listName);
+        }
+    });
+  }
+
 })
 
 
