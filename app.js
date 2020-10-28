@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose")
 const _ = require("lodash")
+const password = "cHPsBRX3NVkELf8"
 
 
 const app = express();
@@ -13,7 +14,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todolistDB", {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect("mongodb+srv://admin_mathieu:"+ password +"@cluster0.avw0s.mongodb.net/todolistDB", {useNewUrlParser: true, useUnifiedTopology: true})
 
 // ItemSchema
 const itemsSchema = new mongoose.Schema({
