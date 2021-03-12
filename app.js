@@ -24,21 +24,6 @@ const itemsSchema = new mongoose.Schema({
 // Mongoose model
 const Item = mongoose.model("Item", itemsSchema)
 
-// DefautItems
-const react = new Item({
-  name:"Learn ReactJS"
-})
-
-const jquery = new Item({
-  name:"Understand Jquery"
-})
-
-const babel = new Item({
-  name:"Learn Babel"
-})
-
-const defaultItems = [react,jquery,babel]
-
 const listSchema = {
   name: String,
   items: [itemsSchema]
@@ -49,22 +34,10 @@ const List = mongoose.model("List", listSchema)
 
 app.get("/", function(req, res) {
 
- Item.find({}, function(err, foundItems){
-  if(foundItems.length === 0){
-    Item.insertMany(defaultItems, function(err){
-      if(err){
-        console.log(err)
-      } else{
-        console.log("Your defaults items have been added with success")
-      }
-    })
-    res.redirect("/")
-  } else {
+  Item.find({}, function(err, foundItems){
     res.render("list", {listTitle: "TODAY", newListItems: foundItems});
-  }
- })
+  })
 });
-
 
 app.get("/:customListName", function(req,res){
   const customListName = _.capitalize(req.params.customListName)
@@ -75,7 +48,6 @@ app.get("/:customListName", function(req,res){
         //create a new list
         const list = new List ({
           name: customListName,
-          items: defaultItems
         })
         list.save();
         res.redirect("/" + customListName)
