@@ -2,36 +2,57 @@
 
 <div class="container"> 
   
-
+<!-- Main title -->
 <h2 class="mainTitle">TO DO LIST</h2>
 
-<h3 class="myCategories">Categories</h3>
+<!-- Categories -->
+<div class="choices">
 
-  <div class="box" id="heading">
-    <h1> <%= listTitle %> </h1>
+  <div class="choice1">
+    <a href="/">Today</a> 
   </div>
 
-<h3 class="myTaks">Today's task</h3>
-
-
-  <div class="box">
-
-    <% newListItems.forEach(function(item){ %>
-      <form action="/delete" method="post"> 
-      <div class="item">
-        <input type="checkbox" onChange="this.form.submit()" value="<%= item.id %>"name="checkbox">
-          <p><%=item.name%></p>
-      </div>
-      <input type="hidden" name="listName" value="<%= listTitle %>">
-      </form>
-    <% }) %>
-
-      <form class="item" action="/" method="post">
-        <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus>
-        <button type="submit" name="list" value="<%= listTitle %>">+</button>
-      </form>
-
+  <div class="choice2">
+    <a href="/work">Work</a> 
   </div>
+
+  <div class="choice3">
+    <a href="/project">Project</a> 
+  </div>
+</div>
+
+<div class="mainBloc">
+
+<!-- Categories selected-->
+  <h3 class="myCategories">Categories</h3>
+  
+    <div class="box" id="heading">
+      <h1> <%= listTitle %> </h1>
+    </div>
+  
+  <h3 class="myTaks">Today's task</h3>
+  
+    <div class="box">
+  
+      <% newListItems.forEach(function(item){ %>
+        <form action="/delete" method="post"> 
+        <div class="item">
+          <input type="checkbox" onChange="this.form.submit()" value="<%= item.id %>"name="checkbox">
+            <p><%=item.name%></p>
+        </div>
+        <input type="hidden" name="listName" value="<%= listTitle %>">
+        </form>
+      <% }) %>
+  
+        <form class="item" action="/" method="post">
+          <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus>
+          <button type="submit" name="list" value="<%= listTitle %>">+</button>
+        </form>
+  
+    </div>
+
+</div>
+
 
 
 </div>

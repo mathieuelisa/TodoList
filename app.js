@@ -35,7 +35,7 @@ const List = mongoose.model("List", listSchema)
 app.get("/", function(req, res) {
 
   Item.find({}, function(err, foundItems){
-    res.render("list", {listTitle: "TODAY", newListItems: foundItems});
+    res.render("list", {listTitle: "Today", newListItems: foundItems});
   })
 });
 
@@ -69,7 +69,7 @@ app.post("/", function(req, res){
     name:itemName
   })
 
-  if(listName === "TODAY"){
+  if(listName === "Today"){
     item.save()
     res.redirect("/")
   } else {
@@ -87,7 +87,7 @@ app.post("/delete", function(req,res){
   const deletedItem = req.body.checkbox;
   const listName = req.body.listName
 
-  if(listName === "TODAY"){
+  if(listName === "Today"){
     Item.findByIdAndRemove(deletedItem, function (err) {
       if(!err){
           console.log("Your item has been removed from your Todo list!")
