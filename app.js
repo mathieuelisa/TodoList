@@ -39,25 +39,71 @@ app.get("/", function(req, res) {
   })
 });
 
-app.get("/:customListName", function(req,res){
-  const customListName = _.capitalize(req.params.customListName)
+// Begin test
 
-  List.findOne({name: customListName}, function(err, foundList){
+app.get("/work", function(req, res) {
+
+  List.findOne({name:"Work"}, function(err, foundList){
     if(!err){
       if (!foundList){
-        //create a new list
+        // Create a new list
         const list = new List ({
-          name: customListName,
+          name:"Work",
         })
         list.save();
-        res.redirect("/" + customListName)
+        res.redirect("/work")
       } else {
         //Show a existing list
         res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
       }
     }
   })
- })
+});
+
+app.get("/project", function(req, res) {
+
+  List.findOne({name:"Project"}, function(err, foundList){
+    if(!err){
+      if (!foundList){
+        // Create a new list
+        const list = new List ({
+          name:"Project",
+        })
+        list.save();
+        res.redirect("/project")
+      } else {
+        //Show a existing list
+        res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
+      }
+    }
+  })
+});
+
+// End Test
+
+
+// GOOD
+
+// app.get("/:customListName", function(req,res){
+
+//   const customListName = _.capitalize(req.params.customListName)
+
+//   List.findOne({name: customListName}, function(err, foundList){
+//     if(!err){
+//       if (!foundList){
+//         // Create a new list
+//         const list = new List ({
+//           name: customListName,
+//         })
+//         list.save();
+//         res.redirect("/" + customListName)
+//       } else {
+//         //Show a existing list
+//         res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
+//       }
+//     }
+//   })
+//  })
 
 
 app.post("/", function(req, res){
