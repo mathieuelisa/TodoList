@@ -31,7 +31,7 @@ const listSchema = {
 
 const List = mongoose.model("List", listSchema)
 
-
+// Principal route
 app.get("/", function(req, res) {
 
   Item.find({}, function(err, foundItems){
@@ -39,71 +39,28 @@ app.get("/", function(req, res) {
   })
 });
 
-// Begin test
+// Custom route
+app.get("/:customListName", function(req,res){
 
-app.get("/work", function(req, res) {
+  const customListName = _.capitalize(req.params.customListName)
 
-  List.findOne({name:"Work"}, function(err, foundList){
+  List.findOne({name: customListName}, function(err, foundList){
     if(!err){
       if (!foundList){
         // Create a new list
         const list = new List ({
-          name:"Work",
+          name: customListName,
         })
         list.save();
-        res.redirect("/work")
+        res.redirect("/" + customListName)
       } else {
         //Show a existing list
-        res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
+        res.render("list", {listTitle:foundList.name, newListItems: foundList.items})
       }
     }
   })
-});
+ })
 
-app.get("/project", function(req, res) {
-
-  List.findOne({name:"Project"}, function(err, foundList){
-    if(!err){
-      if (!foundList){
-        // Create a new list
-        const list = new List ({
-          name:"Project",
-        })
-        list.save();
-        res.redirect("/project")
-      } else {
-        //Show a existing list
-        res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
-      }
-    }
-  })
-});
-
-// End Test
-
-
-// GOOD
-
-// app.get("/:customListName", function(req,res){
-
-//   const customListName = _.capitalize(req.params.customListName)
-
-//   List.findOne({name: customListName}, function(err, foundList){
-//     if(!err){
-//       if (!foundList){
-//         // Create a new list
-//         const list = new List ({
-//           name: customListName,
-//         })
-//         list.save();
-//         res.redirect("/" + customListName)
-//       } else {
-//         //Show a existing list
-//         res.render("List", {listTitle:foundList.name, newListItems: foundList.items})
-//       }
-//     }
-//   })
-//  })
 
 
 app.post("/", function(req, res){
@@ -111,6 +68,7 @@ app.post("/", function(req, res){
   const itemName = req.body.newItem;
   const listName = req.body.list
 
+// Creation new item
   const item = new Item({
     name:itemName
   })
@@ -150,6 +108,8 @@ app.post("/delete", function(req,res){
 
 });
 
+
+// Server 
 let port = process.env.PORT;
 
 if(port == null || port == ""){
