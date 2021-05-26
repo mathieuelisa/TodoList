@@ -22,34 +22,37 @@
 </div>
 
 <div class="mainBloc">
+  <div class="mainBloc__apps">
 
 <!-- Categories selected-->
-  <h3 class="myCategories">Categories</h3>
+    <h3 class="myCategories">Categories</h3>
   
-    <div class="box" id="heading">
-      <h1> <%= listTitle %> </h1>
+<div class="box" id="heading">
+  <h1> <%= listTitle %> </h1>
+</div>
+
+    <h3 class="myTaks">Today's task</h3>
+
+<div class="box">
+  <% newListItems.forEach(function(item){ %>
+    <form action="/delete" method="post"> 
+    <div class="item">
+      <input type="checkbox" onChange="this.form.submit()" value="<%= item.id %>"name="checkbox">
+        <p><%=item.name%></p>
     </div>
-  
-  <h3 class="myTaks">Today's task</h3>
-  
-    <div class="box">
-  
-      <% newListItems.forEach(function(item){ %>
-        <form action="/delete" method="post"> 
-        <div class="item">
-          <input type="checkbox" onChange="this.form.submit()" value="<%= item.id %>"name="checkbox">
-            <p><%=item.name%></p>
-        </div>
-        <input type="hidden" name="listName" value="<%= listTitle %>">
-        </form>
-      <% }) %>
-  
-        <form class="item" action="/" method="post">
-          <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus>
-          <button type="submit" name="list" value="<%= listTitle %>">+</button>
-        </form>
-  
-    </div>
+    <input type="hidden" name="listName" value="<%= listTitle %>">
+    </form>
+  <% }) %>
+
+    <form class="item" action="/" method="post">
+      <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus>
+      <button type="submit" name="list" value="<%= listTitle %>">+</button>
+    </form>
+</div>
+
+  </div>
+
+
 
 </div>
 
