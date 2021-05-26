@@ -10,32 +10,32 @@ html {
   font-family: "Roboto Mono", monospace;
 }
 
-h1 {
-  color: #85a9ff;
-  padding: 10px;
-}
-
 a {
   text-decoration: none;
   color: white;
 }
 
-a:hover {
-  color: red;
-  transition: 0.8s;
+.container {
+  height: 100vh;
+  position: relative;
+  background-image: url("./Images/background2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .mainTitle {
+  position: relative;
   text-align: center;
   font-size: 2.5em;
-  color: #f5f3f4;
+  color: whitesmoke;
+  top: 20px;
 }
 
 .box {
   max-width: 400px;
   margin: 5px auto;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
@@ -45,22 +45,18 @@ a:hover {
 
 .choices {
   display: flex;
-  width: 85%;
+  justify-content: space-between;
+  width: 75%;
   margin: 0 auto;
   color: white;
   margin-top: 44px;
   font-size: 1em;
 }
 
-.choice1,
-.choice2,
-.choice3 {
-  margin: 0 auto;
-}
-
 #heading {
   text-align: center;
   margin-bottom: 17px;
+  color: whitesmoke;
 }
 
 .item {
@@ -76,7 +72,7 @@ a:hover {
 
 input:checked + p {
   text-decoration: line-through;
-  text-decoration-color: #2d6a4f;
+  text-decoration-color: #663591;
 }
 
 input[type="checkbox"] {
@@ -89,10 +85,9 @@ p {
   font-size: 20px;
   font-weight: 200;
   font-weight: bold;
-  color: rgb(120, 120, 120);
+  color: whitesmoke;
 }
 
-.myTaks,
 .myCategories {
   color: #2d6a4f;
   max-width: 400px;
@@ -108,30 +103,27 @@ form.item {
 button {
   min-height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 30%;
   border-color: transparent;
-  background-color: #abc4ff;
   color: whitesmoke;
   font-size: 30px;
-  border-width: 0;
   cursor: pointer;
   transition: 0.5s;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.container {
-  height: 100vh;
-  background-image: url("./Images/background.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+button:hover {
+  color: #ab7cd5;
 }
 
 .mainBloc {
   position: relative;
   top: 25px;
-}
-
-button:hover {
-  color: rgb(120, 120, 120);
 }
 
 input[type="text"] {
@@ -143,31 +135,21 @@ input[type="text"] {
   font-size: 20px;
   font-weight: 200;
   width: 313px;
-  color: rgb(120, 120, 120);
+  color: whitesmoke;
 }
 
 input[type="text"]:focus {
   outline: none;
-  box-shadow: inset 0px -1px 0 0 #2d6a4f;
+  box-shadow: inset 0px -1px 0 0 #abc4ff;
   transition: 0.5s;
 }
 
 ::placeholder {
-  color: grey;
-  opacity: 1;
+  color: whitesmoke;
+  opacity: 0.3;
 }
 
-img {
-  position: absolute;
-}
-
-footer {
-  font-size: 0.7em;
-  color: #f5f3f4;
-  text-align: center;
-}
-
-@media screen and (min-width: 200px) and (max-width: 400px) {
+@media screen and (max-width: 400px) {
   .mainTitle {
     font-size: 2em;
   }
@@ -199,8 +181,12 @@ footer {
 
   button[type="submit"] {
     min-height: 0;
-    width: 40px;
+    width: 35px;
     margin-right: 10px;
+  }
+
+  button {
+    font-size: 25px;
   }
 
   .item {

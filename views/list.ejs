@@ -3,26 +3,24 @@
 <div class="container"> 
   
 <!-- Main title -->
-<h2 class="mainTitle">TO DO LIST</h2>
+<h1 class="mainTitle">TO DO LIST</h1>
 
-<!-- Categories -->
+
 <div class="choices">
-
-  <div class="choice1">
+  <div class="choice_items">
     <a href="/">Today</a> 
   </div>
 
-  <div class="choice2">
+  <div class="choice_items">
     <a href="/Work">Work</a> 
   </div>
 
-  <div class="choice3">
+  <div class="choice_items">
     <a href="/Project">Project</a> 
   </div>
 </div>
 
 <div class="mainBloc">
-  <div class="mainBloc__apps">
 
 <!-- Categories selected-->
     <h3 class="myCategories">Categories</h3>
@@ -31,7 +29,7 @@
   <h1> <%= listTitle %> </h1>
 </div>
 
-    <h3 class="myTaks">Today's task</h3>
+    <h3 class="myCategories">Today's task</h3>
 
 <div class="box">
   <% newListItems.forEach(function(item){ %>
@@ -48,18 +46,11 @@
       <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus>
       <button type="submit" name="list" value="<%= listTitle %>">+</button>
     </form>
-</div>
-
   </div>
 
-
-
 </div>
-
-
 
 </div>
 
 </body>
-
 </html>
