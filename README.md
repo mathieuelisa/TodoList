@@ -2,10 +2,16 @@
 
 ## The project
 
-"TODO LIST" is my second project I realised as an autodidact. <br>
+**TODO LIST** is my second project I realised as an autodidact. <br><br>
 You've 3 choices for your todolist "Today", "Work" or "Project".<br>
 For remove a task just click on it, simple.
 <br><br>
+
+## Install
+
+```json
+npm install
+```
 
 ## Design 🔧
 
@@ -14,4 +20,4 @@ For my design i used [Adobe XD](https://www.adobe.com/fr/products/xd.html)
 
 ## Deployment
 
-I made this game with <strong>Node JS</strong> and deployed on <strong>Heroku</strong> with <strong>MongoDB</strong> and <strong>MongoDB Atlas</strong> .
+I made this game with **Node JS** and deployed on **Heroku** with **MongoDB** and **MongoDB Atlas**.
