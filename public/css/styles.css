@@ -140,7 +140,6 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  box-shadow: inset 0px -1px 0 0 #abc4ff;
   transition: 0.5s;
 }
 
